@@ -2,29 +2,28 @@ const mysql = require("mysql2");
 const inquire = require("./inquire");
 
 async function runProgram() {
-    let toDo = await inquire.openingPrompt();
-    if (toDo.openingPrompt === "View Departments")
-        viewDepartments();
-    else if (toDo.openingPrompt === "View Employee Roles")
-        viewRoles();
-    else if (toDo.openingPrompt === "View Employees")
-        viewEmployees();
-    else if (toDo.openingPrompt === "Add Department")
-        addDepartment();
-    else if (toDo.openingPrompt === "Add Employee Role")
-        addRole();
-    else if (toDo.openingPrompt === "Add Employee")
-        addEmployee();
-    else if (toDo.openingPrompt === "Update Employee Role")
-        updateEmployeeRole();
-        
-    console.log("run ended");
-}
+    let toDo;
+    do {
 
-async function openingPrompt() {
-    let retVal = await inquire.openingPrompt();
-    console.log("openingPrompt ended");
-    return retVal;
+
+        toDo = await inquire.openingPrompt();
+        if (toDo.openingPrompt === "View Departments")
+            viewDepartments();
+        else if (toDo.openingPrompt === "View Employee Roles")
+            viewRoles();
+        else if (toDo.openingPrompt === "View Employees")
+            viewEmployees();
+        else if (toDo.openingPrompt === "Add Department")
+            addDepartment();
+        else if (toDo.openingPrompt === "Add Employee Role")
+            addRole();
+        else if (toDo.openingPrompt === "Add Employee")
+            addEmployee();
+        else if (toDo.openingPrompt === "Update Employee Role")
+            updateEmployeeRole();
+    } while (await inquire.ifNextAction() === true);
+
+    console.log("run ended");
 }
 
 function viewDepartments() {

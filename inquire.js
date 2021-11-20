@@ -12,6 +12,12 @@ const openingPromptObj = {
     ]
 };
 
+const confirmNextAction = {
+    type: "confirm",
+    name: "confirmNextAction",
+    message: "Would you like to do anything else?",
+};
+
 //addDepartment below
 const addDpt = {
     type: "input",
@@ -187,5 +193,11 @@ async function updateEmployeeRole() {
     ]);
 }
 
-module.exports = { openingPrompt, addDepartment, addRole, addEmployee, updateEmployeeRole };
+async function ifNextAction() {
+    let answer = await inquirer.prompt(confirmNextAction);
+
+    return answer.confirmNextAction;
+}
+
+module.exports = { openingPrompt, addDepartment, addRole, addEmployee, updateEmployeeRole, ifNextAction };
 
