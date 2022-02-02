@@ -1,11 +1,10 @@
 const mysql = require("mysql2");
 const inquire = require("./inquire");
+const db = require("./db/connection");
 
 async function runProgram() {
     let toDo;
     do {
-
-
         toDo = await inquire.openingPrompt();
         if (toDo.openingPrompt === "View Departments")
             viewDepartments();
